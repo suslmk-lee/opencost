@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opencost-custom-pricing
+  namespace: opencost
+data:
+  default.json: |
+    {
+      "provider": "custom",
+      "description": "NHN Cloud custom pricing configuration",
+      "CPU": "0.025",
+      "spotCPU": "0.010",
+      "RAM": "0.003",
+      "spotRAM": "0.001",
+      "GPU": "0.80",
+      "storage": "0.00004",
+      "zoneNetworkEgress": "0.008",
+      "regionNetworkEgress": "0.012",
+      "internetNetworkEgress": "0.10",
+      "loadBalancer": "0.020"
+    }

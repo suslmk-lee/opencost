@@ -1,0 +1,37 @@
+# NHN Cloud용 OpenCost Helm Values 파일
+opencost:
+  # Custom Pricing 설정
+  customPricing:
+    enabled: true
+    costModel:
+      description: "NHN Cloud custom pricing based on actual costs"
+      provider: "custom"
+      CPU: "0.025"        # vCPU 시간당 비용 (USD)
+      spotCPU: "0.010"    # Spot vCPU 시간당 비용 (USD)
+      RAM: "0.003"        # GB RAM 시간당 비용 (USD)
+      spotRAM: "0.001"    # Spot GB RAM 시간당 비용 (USD)
+      GPU: "0.80"         # GPU 시간당 비용 (USD)
+      storage: "0.00004"  # GB 스토리지 시간당 비용 (USD)
+      zoneNetworkEgress: "0.008"     # 같은 존 내 네트워크 송신 비용 (GB당)
+      regionNetworkEgress: "0.012"   # 같은 지역 내 네트워크 송신 비용 (GB당)
+      internetNetworkEgress: "0.10"  # 인터넷 네트워크 송신 비용 (GB당)
+      loadBalancer: "0.020"          # 로드밸런서 시간당 비용 (USD)
+
+  # 환경 변수 설정
+  env:
+    - name: CLOUD_PROVIDER_API_KEY
+      value: "default-key"
+    - name: CLUSTER_ID
+      value: "nhn-cloud-cluster"
+
+# Prometheus 연동 설정
+prometheus:
+  internal:
+    enabled: true
+    serviceName: prometheus-server
+    namespaceName: prometheus-system
+    port: 80
+
+# UI 설정
+ui:
+  enabled: true

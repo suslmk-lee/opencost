@@ -1,0 +1,62 @@
+# NHN Cloud 비용 정보를 수집하기 위한 Custom Cost Exporter
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nhn-cloud-cost-exporter
+  namespace: opencost
+  labels:
+    app: nhn-cloud-cost-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nhn-cloud-cost-exporter
+  template:
+    metadata:
+      labels:
+        app: nhn-cloud-cost-exporter
+    spec:
+      containers:
+      - name: cost-exporter
+        image: busybox:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          # 예시: NHN Cloud API를 통해 비용 정보를 수집하는 스크립트
+          # 실제 구현시에는 NHN Cloud API 클라이언트를 사용해야 함
+          while true; do
+            echo "$(date): Collecting NHN Cloud cost data..."
+            # 여기에 NHN Cloud API 호출 로직 구현
+            # curl -H "Authorization: Bearer $NHN_API_TOKEN" \
+            #      https://nhncloud.com/api/v1/billing/costs
+            sleep 3600  # 1시간마다 실행
+          done
+        env:
+        - name: NHN_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: nhn-cloud-credentials
+              key: api-token
+              optional: true
+        - name: NHN_PROJECT_ID
+          value: "your-project-id"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+---
+# NHN Cloud API 인증 정보를 위한 Secret (선택사항)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nhn-cloud-credentials
+  namespace: opencost
+type: Opaque
+data:
+  # base64 인코딩된 API 토큰
+  # echo -n 'your-api-token' | base64
+  api-token: eW91ci1hcGktdG9rZW4=
