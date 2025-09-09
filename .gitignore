@@ -1,0 +1,86 @@
+# OpenCost Installation Repository .gitignore
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.pid
+
+# Kubernetes secrets and sensitive data
+*-secret.yaml
+*-secrets.yaml
+secret-*.yaml
+secrets-*.yaml
+
+# Environment-specific configuration files
+.env
+.env.local
+.env.*.local
+config.local.*
+
+# Custom values files with sensitive data
+*-prod-values.yaml
+*-production-values.yaml
+values-prod.yaml
+values-production.yaml
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Compressed files
+*.tar
+*.tar.gz
+*.zip
+*.rar
+
+# Generated certificates and keys
+*.crt
+*.key
+*.pem
+*.p12
+*.jks
+
+# Helm dependency charts
+charts/*/charts/
+requirements.lock
+
+# Terraform state (if used for infrastructure)
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Local kubectl config overrides
+kubeconfig
+kubeconfig.*
+
+# Custom pricing files with sensitive pricing data
+*-private-pricing.yaml
+*-internal-pricing.json
+pricing-*.secret
+
+# Local development overrides
+local-*
+dev-*
+test-values-*.yaml
+
+CLAUDE.md
